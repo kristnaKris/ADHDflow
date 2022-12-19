@@ -1,106 +1,160 @@
 import React from 'react'
-// import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, SafeAreaView, ScrollView } from 'react-native';
-import { useFonts } from 'expo-font';
-// import Svg, { Path } from "react-native-svg";
-import Group_6914 from "../Svgs/Group_6914";
-import Sun_banner from "../Svgs/Sun_banner";
-import Group_6914_Lottie from "../Svgs/Group_6914_Lottie";
-import Group_6918 from "../Svgs/Group_6918";
-import Rectangle_235 from "../Svgs/Rectangle_235";
+import { StyleSheet, Text, View, SafeAreaView, ScrollView } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
-const HomeScreen = () => {
-
-    const [fontsLoaded] = useFonts({
-        'Montserrat_400Regular': require('../assets/fonts/Montserrat_Regular.ttf'),
-    });
-
-    const date = new Date();
-    const dayOfTheWeek = date.getDay();
-    const dayOfTheWeekNames = ["Søndag", "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag"];
-    const month = date.getMonth();
-    const monthNames = ["januar", "februar", "marts", "april", "maj", "juni", "juli", "august", "september", "oktober", "november", "december"]
+import DailyChallenge from '../components/svgs/DailyChallenge';
+import StartYourDayEvening from '../components/svgs/StartYourDayEvening';
+import StartYourDayMorning from '../components/svgs/StartYourDayMorning';
+import YourProgressSleeping from '../components/svgs/YourProgressSleeping';
+import YourProgressEllipses from '../components/svgs/YourProgressEllipses';
 
 
+function HomeScreen() {
     return (
-        <SafeAreaView style={styles.container}>
-            <ScrollView>
-                <View style={styles.banner} >
-                    {/* <Image style={styles.bannerPicture} source={require("../assets/sun_banner.jpg")} /> */}
-                    <Sun_banner />
-                </View>
-                <View style={styles.dateBlock}>
-                    <Text style={[styles.text, styles.today]}>I dag</Text>
-                    <Text style={[styles.text, styles.date]}>{dayOfTheWeekNames[dayOfTheWeek]}, {date.getDate()}. {monthNames[month]}</Text>
-                </View>
-                <View style={styles.recommendedBlock} >
-                    <Text style={styles.recommendedText} >Anbefalet indhold til dig</Text>
-                    <View>
-                        <Group_6914 />
-                        {/* <Group_6914_Lottie style={{zIndex: -4}}/> */}
+        <SafeAreaView style={styles.rootContainer}>
+            <ScrollView style={styles.screenContainer} showsVerticalScrollIndicator={false}>
+
+                <LinearGradient
+                    style={styles.dailyChallengeContainer}
+                    colors={['#3A2181', '#6040BD', '#825AF2']}
+                    start={{ x: 1, y: 1 }}
+                    end={{ x: 0, y: 1 }}
+                >
+                    <View style={styles.dailyChallengeLeft}>
+                        <Text style={styles.dailyChallengeLeftText}>
+                            <Text style={styles.dailyChallengeLeftTextAmount}>403 andre er i gang</Text> {'\n'}
+                            DIN {'\n'}
+                            DAGLIGE {'\n'}
+                            CHALLENGE
+                        </Text>
                     </View>
-                </View>
-                <View style={styles.activityBlock}>
-                    <Text style={[styles.recommendedText, { marginBottom: "3%", }]}>Hurtige aktiviteter</Text>
-                    <View style={{ flexDirection: 'row' }}>
-                        <Group_6918 />
-                        <Rectangle_235 />
+                    <View style={styles.dailyChallengeRight}>
+                        <DailyChallenge />
                     </View>
+                </LinearGradient>
+
+                <View style={styles.startYourDayContainer}>
+                    <Text style={styles.startYourDayTitle}>Start din dag</Text>
+                    <LinearGradient
+                        style={styles.startYourDayRoutines}
+                        colors={['#82A8F387', '#82A8F3']}
+                    >
+                        <Text style={styles.startYourDayText}>Opsæt {'\n'}morgenrutine</Text>
+                        <StartYourDayMorning />
+                    </LinearGradient>
+                    <LinearGradient
+                        style={styles.startYourDayRoutines}
+                        colors={['#452C7C', '#4E2E92', '#6934DAED']}
+                    >
+                        <Text style={styles.startYourDayText}>Opsæt {'\n'}aftenrutine</Text>
+                        <StartYourDayEvening />
+                    </LinearGradient>
+                </View>
+
+                <View style={styles.yourProgressContainer}>
+                    <Text style={styles.startYourDayTitle}>Dit forløb</Text>
+                    <LinearGradient
+                        style={styles.yourProgress}
+                        colors={['#8952FFE3', '#3E1F9491']}
+                    >
+                        <View style={styles.yourProgressLeft}>
+                            <Text style={styles.yourProgressCourseText}>Forløb: Bedre Søvn</Text>
+                            <Text style={styles.yourProgressYellowText}>1. Dig &amp; din søvn</Text>
+                        </View>
+                        <View style={styles.yourProgressRight}>
+                            <YourProgressSleeping />
+                        </View>
+                    </LinearGradient>
                 </View>
             </ScrollView>
         </SafeAreaView>
     )
 }
-export default HomeScreen
+export default HomeScreen;
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#261863',
+    rootContainer: {
         flex: 1,
+        padding: 16,
+        alignItems: "center",
+        backgroundColor: "#2C166A",
     },
-    banner: {
-        marginTop: "11.75%",
+    screenContainer: {
+        width: "85%",
     },
-    text: {
-       // fontFamily: 'Montserrat_400Regular', // need to import this
-        fontStyle: "normal",
-    },
-    today: {
-        color: "white",
-        fontSize: 20,
-        fontWeight: "600",
-    },
-    date: {
-        color: "#F5C371",
-        fontSize: 16,
-    },
-    dateBlock: {
-        // marginLeft: 10,  ask Kristian about your px/4=% theory
-        // marginTop: 12,
-        // marginBottom: 28,
 
-        marginLeft: "2.5%",
-        marginTop: "3%",
-        marginBottom: "7%",
+    dailyChallengeContainer: {
+        flexDirection: "row",
+        justifyContent: "space-around",
+        borderRadius: 15,
+        height: 200,
+        overflow: 'hidden',
+        marginTop: 16,
     },
-    recommendedBlock: {
+    dailyChallengeLeft: {
+        paddingLeft: 24,
+        justifyContent: "center",
+    },
+    dailyChallengeLeftText: {
+        color: "#ffffff",
+        fontSize: 22,
+    },
+    dailyChallengeLeftTextAmount: {
+        color: "#F4C022",
+        fontSize: 11,
+    },
+    dailyChallengeRight: {
+        justifyContent: "flex-end"
+    },
 
+    startYourDayContainer: {
+        marginTop: 36,
     },
-    recommendedText: {
+    startYourDayTitle: {
         color: "white",
-        fontSize: 20,
-        marginLeft: "5%",
-        marginBottom: "3.75%",
+        fontSize: 22,
+        marginBottom: 20,
     },
-    Group_6918: {
-        // alignContent:"left"
-        // alignSelf:"left"
-        // alignItems: "left",
-        // marginRight: "50%",
-        // marginTop: "25%",
+    startYourDayRoutines: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginBottom: 20,
+        paddingLeft: 20,
+        alignItems: "center",
+        borderRadius: 15,
+        height: 70,
+        overflow: 'hidden',
     },
-    activityBlock: {
-        marginTop: "11.5%",
-        marginBottom: "30%",
+    startYourDayText: {
+        color: "white",
+        fontSize: 18,
+    },
+
+    yourProgressContainer: {
+        marginTop: 16,
+    },
+    yourProgress: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        borderRadius: 15,
+        height: 200,
+        overflow: 'hidden',
+        marginBottom: 32,
+    },
+    yourProgressLeft: {
+        paddingTop: 20,
+        paddingLeft: 20,
+    },
+    yourProgressRight: {
+        paddingTop: 20,
+    },
+    yourProgressCourseText: {
+        color: "#ffffff",
+        fontSize: 18,
+        marginBottom: 10,
+    },
+    yourProgressYellowText: {
+        color: "#F4C022",
+        fontSize: 14,
     },
 })

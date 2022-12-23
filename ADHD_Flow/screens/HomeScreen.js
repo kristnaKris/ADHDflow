@@ -1,18 +1,24 @@
 import React from 'react'
-import { StyleSheet, Text, View, SafeAreaView, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, Pressable, Image, Platform } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
 
-import DailyChallenge from '../components/svgs/DailyChallenge';
-import StartYourDayEvening from '../components/svgs/StartYourDayEvening';
-import StartYourDayMorning from '../components/svgs/StartYourDayMorning';
-import YourProgressSleeping from '../components/svgs/YourProgressSleeping';
-import YourProgressEllipses from '../components/svgs/YourProgressEllipses';
-
+import DailyChallengeSVG from '../components/svgs/DailyChallengeSVG';
+import StartYourDayMorningSVG from '../components/svgs/StartYourDayMorningSVG';
+import StartYourDayEveningSVG from '../components/svgs/StartYourDayEveningSVG';
+import YourProgressSleepingSVG from '../components/svgs/YourProgressSleepingSVG';
+import YourProgressEllipsesSVG from '../components/svgs/YourProgressEllipsesSVG';
 
 function HomeScreen() {
+
+    const navigation = useNavigation();
+    function morningRoutinePressHandler() {
+        navigation.navigate('ActivitiesScreen');
+    }
+
     return (
         <SafeAreaView style={styles.rootContainer}>
-            <ScrollView style={styles.screenContainer} showsVerticalScrollIndicator={false}>
+            <ScrollView style={{ width: "85%" }} showsVerticalScrollIndicator={false}>
 
                 <LinearGradient
                     style={styles.dailyChallengeContainer}
@@ -28,26 +34,35 @@ function HomeScreen() {
                             CHALLENGE
                         </Text>
                     </View>
-                    <View style={styles.dailyChallengeRight}>
-                        <DailyChallenge />
+                    <View style={{ justifyContent: "flex-end" }}>
+                        <DailyChallengeSVG />
                     </View>
                 </LinearGradient>
 
                 <View style={styles.startYourDayContainer}>
                     <Text style={styles.startYourDayTitle}>Start din dag</Text>
-                    <LinearGradient
-                        style={styles.startYourDayRoutines}
-                        colors={['#82A8F387', '#82A8F3']}
-                    >
-                        <Text style={styles.startYourDayText}>Opsæt {'\n'}morgenrutine</Text>
-                        <StartYourDayMorning />
-                    </LinearGradient>
+                    <View style={{ marginBottom: 20 }}>
+                        <Pressable onPress={morningRoutinePressHandler}
+                            android_ripple={{ color: '#9f85c080' }}
+                        >
+                            <View style={{ overflow: "hidden" }}>
+                                <LinearGradient                                 // find out why overflow doesn't work here
+                                    style={styles.startYourDayRoutines}
+                                    colors={['#82A8F387', '#82A8F3']}
+                                >
+                                    <Text style={styles.startYourDayText}>Opsæt {'\n'}morgenrutine</Text>
+                                    <StartYourDayMorningSVG />
+                                </LinearGradient>
+                            </View>
+                        </Pressable>
+                    </View>
+
                     <LinearGradient
                         style={styles.startYourDayRoutines}
                         colors={['#452C7C', '#4E2E92', '#6934DAED']}
                     >
                         <Text style={styles.startYourDayText}>Opsæt {'\n'}aftenrutine</Text>
-                        <StartYourDayEvening />
+                        <StartYourDayEveningSVG />
                     </LinearGradient>
                 </View>
 
@@ -62,7 +77,10 @@ function HomeScreen() {
                             <Text style={styles.yourProgressYellowText}>1. Dig &amp; din søvn</Text>
                         </View>
                         <View style={styles.yourProgressRight}>
-                            <YourProgressSleeping />
+                            <YourProgressSleepingSVG />
+                        </View>
+                        <View style={{ position: 'absolute', bottom: -8, left: -13, }} >
+                            <YourProgressEllipsesSVG />
                         </View>
                     </LinearGradient>
                 </View>
@@ -73,14 +91,10 @@ function HomeScreen() {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-    rootContainer: {
+    rootContainer: {    // don't forget to tidy up the styles
         flex: 1,
-        padding: 16,
         alignItems: "center",
         backgroundColor: "#2C166A",
-    },
-    screenContainer: {
-        width: "85%",
     },
 
     dailyChallengeContainer: {
@@ -89,10 +103,10 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         height: 200,
         overflow: 'hidden',
-        marginTop: 16,
+        marginTop: Platform.OS === 'android' ? 40 : 16,
     },
     dailyChallengeLeft: {
-        paddingLeft: 24,
+        paddingLeft: 20,
         justifyContent: "center",
     },
     dailyChallengeLeftText: {
@@ -103,12 +117,9 @@ const styles = StyleSheet.create({
         color: "#F4C022",
         fontSize: 11,
     },
-    dailyChallengeRight: {
-        justifyContent: "flex-end"
-    },
 
     startYourDayContainer: {
-        marginTop: 36,
+        marginTop: 20,
     },
     startYourDayTitle: {
         color: "white",
@@ -118,7 +129,6 @@ const styles = StyleSheet.create({
     startYourDayRoutines: {
         flexDirection: "row",
         justifyContent: "space-between",
-        marginBottom: 20,
         paddingLeft: 20,
         alignItems: "center",
         borderRadius: 15,
@@ -131,7 +141,7 @@ const styles = StyleSheet.create({
     },
 
     yourProgressContainer: {
-        marginTop: 16,
+        marginTop: 20,
     },
     yourProgress: {
         flexDirection: "row",

@@ -1,7 +1,7 @@
 import React from "react";
 import { SvgXml } from "react-native-svg";  
 export default function YourProgressEllipses(){  
-  const svgMarkup = `<svg width="364" height="192" viewBox="0 0 364 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+  const svgMarkup = `<svg width="464" height="192" viewBox="0 0 324 192" fill="none" xmlns="http://www.w3.org/2000/svg">
   <g id="Group 6914">
   <g id="Group 6922" clip-path="url(#clip0_1_598)">
   <ellipse id="Ellipse 129" cx="213.801" cy="156.406" rx="4.40323" ry="4.88542" fill="#FFC000"/>
@@ -33,7 +33,7 @@ export default function YourProgressEllipses(){
   </svg>
   
 `;
-  const SvgImage = () => <SvgXml xml={svgMarkup} width="280" />;  
+  const SvgImage = () => <SvgXml xml={svgMarkup} width="300" />;  
 
   return <SvgImage />;
 }

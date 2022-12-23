@@ -4,7 +4,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
-
 import HomeScreen from './screens/HomeScreen';
 import ExploreScreen from './screens/ExploreScreen';
 import CommunityScreen from './screens/CommunityScreen';
@@ -51,14 +50,14 @@ function BottomTabsNav() {
 export default function App() {
   return (
     <>
-      <StatusBar style='light' />
+      <StatusBar style='light' backgroundColor='#d5c8c837' />
       <NavigationContainer>
         <Stack.Navigator screenOptions={{
           headerShown: false,
-          contentStyle: { backgroundColor: "#2C166A" }
+          contentStyle: { backgroundColor: "#2C166A" } // don't forget to check why this doesn't work
         }}>
           <Stack.Screen name="BottomTabsNav" component={BottomTabsNav} />
-          <Stack.Screen name="ActivitiesScreen" component={ActivitiesScreen} />
+          <Stack.Screen name="ActivitiesScreen" component={ActivitiesScreen} options={{ presentation: 'modal' }} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

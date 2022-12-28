@@ -5,6 +5,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 
 import MorningRoutineActivitiesSVG from '../components/svgs/MorningRoutineActivitiesSVG';
+import HabitPickerModal from '../components/HabitPickerModal';
 
 
 function ActivitiesScreen() {
@@ -30,11 +31,11 @@ function ActivitiesScreen() {
     const [modalIsVisible, setModalIsVisible] = useState(false);
     const [courseGoals, setCourseGoals] = useState([]);
 
-    function startAddGoalHandler() {
+    function startAddHabitHandler() {
         setModalIsVisible(true);
     }
 
-    function endAddGoalHandler() {
+    function endAddHabitlHandler() {
         setModalIsVisible(false);
     }
     // </>
@@ -80,9 +81,14 @@ function ActivitiesScreen() {
                     Or start a journey and allow us to{"\n"}
                     guide you!{"\n"}
                     {"\n"}
-                    Add habits button
+                    <Pressable onPress={startAddHabitHandler}>
+                        <Text style={{ textAlign: 'center' }}>Add habits button</Text>
+                    </Pressable>
                 </Text>
             </View>
+            <HabitPickerModal
+                visible={modalIsVisible}
+                onCancel={endAddHabitlHandler} />
 
         </SafeAreaView>
     )

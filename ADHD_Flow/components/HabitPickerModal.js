@@ -1,3 +1,5 @@
+// deprecated component
+
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, SafeAreaView, ScrollView, Pressable, Platform, Modal, Button, TextInput, FlatList } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -5,24 +7,27 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 
 import MorningRoutineActivitiesSVG from '../components/svgs/MorningRoutineActivitiesSVG';
+import ManageHabit from '../screens/ManageHabit';
 
-const [habits, setHabits] = useState([]);
-
-function addHabitHandler(enteredHabitText) {
-    setHabits((currentHabits) => [
-        ...currentHabits,
-        { text: enteredHabitText, id: Math.random().toString() },
-    ]);
-    endAddHabitHandler();
-}
 
 function HabitPickerModal(props) {
+
+    const [enteredHabitText, setEnteredHabitText] = useState('');
+
+    function habitInputHandler(enteredText) {
+        setEnteredHabitText(enteredText);
+    }
+
+    function addHabitHandler() {
+        props.onAddHabit(enteredHabitText);
+        setEnteredHabitText('');
+    }
+
 
     return (
         <Modal visible={props.visible} animationType="slide">
             <SafeAreaView style={styles.rootContainer}>
                 <View>
-                    <Button title="Cancel" onPress={props.onCancel} color="#65c6f3" />
                     <MorningRoutineActivitiesSVG />
                 </View>
 
@@ -31,23 +36,18 @@ function HabitPickerModal(props) {
                         <Ionicons name="search-outline" size={26} />
                     </View>
                     <View style={styles.textInput}>
-                        <TextInput placeholder="Search or add a new habit" />
+                        <TextInput placeholder="Search or add a new habit" onChangeText={habitInputHandler} value={enteredHabitText} />
                     </View>
                 </View>
 
-                <View style={styles.contentContainer}>
-                    <FlatList
-                        data={habits}
-                        renderItem={(itemData) => {
-                            return (
-                                <View>
-                                    <Text> {itemData.item}</Text>
-                                </View>
-                            );
-                        }}
-                    />
-                </View>
+                <ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardShouldPersistTaps='never' keyboardDismissMode="on-drag">
+                    <View style={styles.contentContainer}>
+                        <Button title="Add Habit" onPress={addHabitHandler} color="#b180f0" />
+                        <Button title="Cancel" onPress={props.onCancel} color="#65c6f3" />
 
+                        <ManageHabit/>
+                    </View>
+                </ScrollView>
             </SafeAreaView>
         </Modal>
     )

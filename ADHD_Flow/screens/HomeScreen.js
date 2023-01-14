@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, Pressable, Image, Platform } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, Pressable, Platform } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 
@@ -18,7 +18,10 @@ function HomeScreen() {
 
     return (
         <SafeAreaView style={styles.rootContainer}>
-            <ScrollView style={{ width: "85%" }} showsVerticalScrollIndicator={false}>
+            <ScrollView
+                style={{ width: "85%" }}
+                showsVerticalScrollIndicator={false}
+            >
 
                 <LinearGradient
                     style={styles.dailyChallengeContainer}

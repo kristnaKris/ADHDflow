@@ -77,8 +77,6 @@ function HabitForm({ submitButtonLabel, onCancel, onSubmit, defaultValues }) {
         invalid={!inputs.description.isValid}
         textInputConfig={{
           multiline: true,
-          // autoCapitalize: 'none'
-          // autoCorrect: false // default is true
           onChangeText: inputChangedHandler.bind(this, 'description'),
           value: inputs.description.value,
           placeholder: "Describe the habit",

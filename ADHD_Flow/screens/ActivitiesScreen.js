@@ -14,8 +14,7 @@ import { GlobalStyles } from '../constants/styles';
 function ActivitiesScreen() {
 
     // <>
-    // DateTimePicker stuff for setting the alarm
-    // currently only works on Android
+    // DateTimePicker for setting the alarm
     const [time, setTime] = useState(new Date());
     const [show, setShow] = useState(false);
 
@@ -40,26 +39,28 @@ function ActivitiesScreen() {
                 <MorningRoutineActivitiesSVG />
                 <Pressable
                     onPress={showTimepicker}
-                    android_ripple={{ color: '#9f85c0ff' }}
-                    style={styles.headerAlarmGroup}
+                    // android_ripple={{ color: '#9f85c0ff' }}
+                    style={({ pressed }) => pressed && styles.pressed}
                 >
-                    <Ionicons
-                        name="alarm-outline"
-                        color={"#D9D9D9"}
-                        size={32}
-                        style={{ paddingRight: 8 }}
-                    />
-                    <Text style={styles.headerAlarmText} >Alarm{"\n"}
-                        {(time.getHours() < 10 ? '0' : '') + time.getHours()}:{(time.getMinutes() < 10 ? '0' : '') + time.getMinutes()}
-                    </Text>
-                    {show && (
-                        <DateTimePicker     //Problematic on iOS
-                            value={time}
-                            mode="time"
-                            is24Hour={true}
-                            onChange={onChange}
+                    <View style={styles.headerAlarmGroup}>
+                        <Ionicons
+                            name="alarm-outline"
+                            color={GlobalStyles.colors.primary50}
+                            size={32}
+                            style={{ paddingRight: 8 }}
                         />
-                    )}
+                        <Text style={styles.headerAlarmText} >Alarm{"\n"}
+                            {(time.getHours() < 10 ? '0' : '') + time.getHours()}:{(time.getMinutes() < 10 ? '0' : '') + time.getMinutes()}
+                        </Text>
+                        {show && (
+                            <DateTimePicker     //Problematic on iOS
+                                value={time}
+                                mode="time"
+                                is24Hour={true}
+                                onChange={onChange}
+                            />
+                        )}
+                    </View>
                 </Pressable>
             </View>
 
@@ -89,7 +90,7 @@ export default ActivitiesScreen;
 const styles = StyleSheet.create({
     rootContainer: {
         flex: 1,
-        backgroundColor: "#ffffff",
+        backgroundColor: GlobalStyles.colors.primary50,
     },
     headerAlarmGroup: {
         flexDirection: "row",
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
         left: 15,
     },
     headerAlarmText: {
-        color: "#D9D9D9",
+        color: GlobalStyles.colors.primary50,
         fontSize: 18,
     },
     headerHabits: {
@@ -114,6 +115,9 @@ const styles = StyleSheet.create({
     contentContainer: {
         flex: 1,
         width: "100%",
+    },
+    pressed: {
+        opacity: 0.75,
     },
 
 })

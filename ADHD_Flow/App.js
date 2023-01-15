@@ -41,9 +41,9 @@ function AuthStack() {
 function BottomTabsNav() {
   return <BottomTabs.Navigator screenOptions={{
     headerShown: false,
-    contentStyle: { backgroundColor: "#2C166A" },
-    tabBarInactiveTintColor: "#929292",
-    tabBarActiveTintColor: "#5101c8", //change later
+    contentStyle: { backgroundColor: GlobalStyles.colors.primary800 },
+    tabBarInactiveTintColor: GlobalStyles.colors.gray50,
+    tabBarActiveTintColor: GlobalStyles.colors.primary500,
   }}>
     <BottomTabs.Screen name="I dag" component={HomeScreen}
       options={{
@@ -77,7 +77,7 @@ function AuthenticatedStack() {
   return (
     <Stack.Navigator screenOptions={{
       headerShown: false,
-      contentStyle: { backgroundColor: "#2C166A" } // don't forget to check why this doesn't work
+      contentStyle: { backgroundColor: GlobalStyles.colors.primary800 } 
     }}>
       <Stack.Screen name="BottomTabsNav" component={BottomTabsNav} />
       <Stack.Screen name="ActivitiesScreen" component={ActivitiesScreen} options={{ presentation: 'modal' }} />

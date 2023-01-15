@@ -17,7 +17,6 @@ function Input({
       </Text>
       <TextInput
         style={[styles.input, isInvalid && styles.inputInvalid]}
-        // autoCapitalize={false}   check video later
         autoCapitalize="none"
         keyboardType={keyboardType}
         secureTextEntry={secure}

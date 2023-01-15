@@ -8,6 +8,7 @@ import StartYourDayMorningSVG from '../components/svgs/StartYourDayMorningSVG';
 import StartYourDayEveningSVG from '../components/svgs/StartYourDayEveningSVG';
 import YourProgressSleepingSVG from '../components/svgs/YourProgressSleepingSVG';
 import YourProgressEllipsesSVG from '../components/svgs/YourProgressEllipsesSVG';
+import { GlobalStyles } from '../constants/styles';
 
 function HomeScreen() {
 
@@ -46,27 +47,31 @@ function HomeScreen() {
                     <Text style={styles.startYourDayTitle}>Start din dag</Text>
                     <View style={{ marginBottom: 20 }}>
                         <Pressable onPress={morningRoutinePressHandler}
-                            android_ripple={{ color: '#9f85c080' }}
+                            // android_ripple={{ color: '#9f85c080' }}
+                            style={({ pressed }) => pressed && styles.pressed}
                         >
-                            <View style={{ overflow: "hidden" }}>
-                                <LinearGradient                                 // find out why overflow doesn't work here
-                                    style={styles.startYourDayRoutines}
-                                    colors={['#82A8F387', '#82A8F3']}
-                                >
-                                    <Text style={styles.startYourDayText}>Opsæt {'\n'}morgenrutine</Text>
-                                    <StartYourDayMorningSVG />
-                                </LinearGradient>
-                            </View>
+                            <LinearGradient
+                                style={styles.startYourDayRoutines}
+                                colors={['#82A8F387', '#82A8F3']}
+                            >
+                                <Text style={styles.startYourDayText}>Opsæt {'\n'}morgenrutine</Text>
+                                <StartYourDayMorningSVG />
+                            </LinearGradient>
                         </Pressable>
                     </View>
 
-                    <LinearGradient
-                        style={styles.startYourDayRoutines}
-                        colors={['#452C7C', '#4E2E92', '#6934DAED']}
+                    <Pressable
+                        // onPress={}
+                        style={({ pressed }) => pressed && styles.pressed}
                     >
-                        <Text style={styles.startYourDayText}>Opsæt {'\n'}aftenrutine</Text>
-                        <StartYourDayEveningSVG />
-                    </LinearGradient>
+                        <LinearGradient
+                            style={styles.startYourDayRoutines}
+                            colors={['#452C7C', '#4E2E92', '#6934DAED']}
+                        >
+                            <Text style={styles.startYourDayText}>Opsæt {'\n'}aftenrutine</Text>
+                            <StartYourDayEveningSVG />
+                        </LinearGradient>
+                    </Pressable>
                 </View>
 
                 <View style={styles.yourProgressContainer}>
@@ -94,12 +99,11 @@ function HomeScreen() {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-    rootContainer: {    // don't forget to tidy up the styles
+    rootContainer: {    // I'm sorry for the mess of these styles, will restructure it later, paying more attention to it in the following components
         flex: 1,
         alignItems: "center",
-        backgroundColor: "#2C166A",
+        backgroundColor: GlobalStyles.colors.primary800,
     },
-
     dailyChallengeContainer: {
         flexDirection: "row",
         justifyContent: "space-around",
@@ -113,11 +117,11 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     dailyChallengeLeftText: {
-        color: "#ffffff",
+        color: GlobalStyles.colors.primary50,
         fontSize: 22,
     },
     dailyChallengeLeftTextAmount: {
-        color: "#F4C022",
+        color: GlobalStyles.colors.accent500,
         fontSize: 11,
     },
 
@@ -162,12 +166,15 @@ const styles = StyleSheet.create({
         paddingTop: 20,
     },
     yourProgressCourseText: {
-        color: "#ffffff",
+        color: GlobalStyles.colors.primary50,        
         fontSize: 18,
         marginBottom: 10,
     },
     yourProgressYellowText: {
-        color: "#F4C022",
+        color: GlobalStyles.colors.accent500,
         fontSize: 14,
+    },
+    pressed: {
+        opacity: 0.75,
     },
 })

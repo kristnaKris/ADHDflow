@@ -15,8 +15,8 @@ function ManageHabit({ route, navigation }) {
 
   const habitsCtx = useContext(HabitsContext);
 
-  const editedHabitId = route.params?.habitId;
-  const isEditing = !!editedHabitId;
+  const editedHabitId = route.params?.habitId; // "?" conditional operator to check whether it is undefined
+  const isEditing = !!editedHabitId; 
 
   const selectedHabit = habitsCtx.habits.find(
     (habit) => habit.id === editedHabitId

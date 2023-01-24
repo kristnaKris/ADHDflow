@@ -54,16 +54,16 @@ function AuthContent({ isLogin, onAuthenticate }) {
 
   return (
     <View style={styles.authContent}>
-      <AuthForm
-        isLogin={isLogin}
-        onSubmit={submitHandler}
-        credentialsInvalid={credentialsInvalid}
-      />
-      <View style={styles.buttons}>
-        <FlatButton onPress={switchAuthModeHandler}>
-          {isLogin ? 'Create a new user' : 'Log in instead'}
-        </FlatButton>
-      </View>
+          <AuthForm
+            isLogin={isLogin}
+            onSubmit={submitHandler}
+            credentialsInvalid={credentialsInvalid}
+          />
+          <View style={styles.buttons}>
+            <FlatButton onPress={switchAuthModeHandler}>
+              {isLogin ? 'Create a new user' : 'Log in instead'}
+            </FlatButton>
+          </View>
     </View>
   );
 }

@@ -11,7 +11,7 @@ function SignupScreen() {
 
   const authCtx = useContext(AuthContext);
 
-  async function signupHandler({ email, password }) {
+  async function signupHandler({ email, password }) { // object destructuring from AuthContent
     setIsAuthenticating(true);
     try {
       const token = await createUser(email, password);
@@ -29,7 +29,7 @@ function SignupScreen() {
     return <LoadingOverlay message="Creating user..." />;
   }
 
-  return <AuthContent onAuthenticate={signupHandler} />;
+  return  <AuthContent onAuthenticate={signupHandler} />;
 }
 
 export default SignupScreen;

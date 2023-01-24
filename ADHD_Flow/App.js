@@ -28,7 +28,7 @@ function AuthStack() {
     <Stack.Navigator
       screenOptions={{
         headerStyle: { backgroundColor: GlobalStyles.colors.primary400 },
-        headerTintColor: 'white',
+        headerTintColor: GlobalStyles.colors.primary50,
         contentStyle: { backgroundColor: GlobalStyles.colors.primary100 },
       }}
     >
@@ -73,7 +73,6 @@ function BottomTabsNav() {
 }
 
 function AuthenticatedStack() {
-  const authCtx = useContext(AuthContext);
   return (
     <Stack.Navigator screenOptions={{
       headerShown: false,
@@ -99,7 +98,6 @@ function Navigation() {
 
 function Root() {
   const [isTryingLogin, setIsTryingLogin] = useState(true);
-
   const authCtx = useContext(AuthContext);
 
   useEffect(() => {

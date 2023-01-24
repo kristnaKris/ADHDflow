@@ -4,7 +4,7 @@ const BACKEND_URL =
   'https://adhd-flow-finalproject-default-rtdb.europe-west1.firebasedatabase.app/';
 
 export async function storeHabit(habitData) {
-  const response = await axios.post(BACKEND_URL + '/habits.json', habitData);
+  const response = await axios.post(BACKEND_URL + '/habits.json', habitData); 
   const id = response.data.name;
   return id;
 }

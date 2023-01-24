@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   buttonText: {
-    color: 'white',
+    color: GlobalStyles.colors.primary50,
     textAlign: 'center',
   },
   flatText: {

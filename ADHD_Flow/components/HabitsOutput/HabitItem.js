@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   durationContainer: {
     paddingHorizontal: 8,
     paddingVertical: 4,
-    backgroundColor: 'white',
+    backgroundColor: GlobalStyles.colors.primary50,
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: "center",

@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     startYourDayTitle: {
-        color: "white",
+        color: GlobalStyles.colors.primary50,
         fontSize: 22,
         marginBottom: 20,
     },
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
     },
     startYourDayText: {
-        color: "white",
+        color: GlobalStyles.colors.primary50,
         fontSize: 18,
     },
 
